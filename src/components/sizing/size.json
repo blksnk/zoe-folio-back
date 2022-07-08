@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_sizing_sizes",
+  "info": {
+    "displayName": "size",
+    "icon": "arrows-alt-h",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "width": {
+      "type": "integer",
+      "required": true,
+      "default": 5
+    },
+    "height": {
+      "type": "integer",
+      "required": true,
+      "default": 5
+    },
+    "x": {
+      "type": "integer"
+    },
+    "y": {
+      "type": "integer"
+    }
+  }
+}

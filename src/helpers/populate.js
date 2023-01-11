@@ -1,5 +1,5 @@
 /*********************************
- * Poplulate All Attributes
+ * Populate All Attributes
  *
  * https://forum.strapi.io/t/strapi-v4-populate-media-and-dynamiczones-from-components/12670/2
  *
@@ -47,8 +47,8 @@ const getPopulateFromSchema = function (schema) {
   }, {})
 }
 
-function createPopulatedController(uid, schema) {
-  return createCoreController(uid, () => {
+function createPopulatedController(uid, schema, extensions = {}) {
+  return createCoreController(uid, ({ strapi }) => {
     console.log(schema.collectionName, getPopulateFromSchema(schema))
     return {
       async find(ctx) {
@@ -72,8 +72,9 @@ function createPopulatedController(uid, schema) {
         }
         return await super.findOne(ctx)
       },
+      ...Object.fromEntries(Object.entries(extensions).map(([name, fn]) => ([ name, fn(strapi) ])))
     }
   })
 }
- 
- module.exports = createPopulatedController
+
+ module.exports = { createPopulatedController, getPopulateFromSchema }

@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "studio_sections",
+  "info": {
+    "singularName": "studio-section",
+    "pluralName": "studio-sections",
+    "displayName": "Studio section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "photos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "media.studio-media"
+    },
+    "hook": {
+      "type": "richtext"
+    },
+    "address": {
+      "type": "richtext"
+    },
+    "contact_email": {
+      "type": "email"
+    }
+  }
+}

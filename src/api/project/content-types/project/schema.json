@@ -57,6 +57,17 @@
       "type": "component",
       "repeatable": true,
       "component": "media.project-media"
+    },
+    "archived": {
+      "type": "boolean",
+      "default": false
+    },
+    "index": {
+      "type": "integer",
+      "default": 0,
+      "required": true,
+      "unique": false,
+      "min": 0
     }
   }
 }

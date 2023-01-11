@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_media_studio_medias",
+  "info": {
+    "displayName": "Studio Media"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "media": {
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

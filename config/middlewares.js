@@ -26,7 +26,14 @@ module.exports = [
       },
     },
   },
-  'strapi::cors',
+  {
+    name: 'strapi::cors',
+    config: {
+      enabled: true,
+      headers: '*',
+      origin: ['http://localhost:3000', 'https://candito.studio', 'https://lustrous-baklava-ede9b2.netlify.app']
+    }
+  },
   'strapi::poweredBy',
   'strapi::logger',
   'strapi::query',

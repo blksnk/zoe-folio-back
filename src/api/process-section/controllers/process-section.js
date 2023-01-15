@@ -4,6 +4,9 @@
  *  process-section controller
  */
 
-const { createCoreController } = require('@strapi/strapi').factories;
+const collectionType = 'process-section'
 
-module.exports = createCoreController('api::process-section.process-section');
+const schema = require(`../content-types/${collectionType}/schema.json`);
+const { createPopulatedController } = require("../../../helpers/populate");
+
+module.exports = createPopulatedController(`api::${collectionType}.${collectionType}`, schema);

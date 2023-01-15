@@ -31,7 +31,7 @@ module.exports = [
     config: {
       enabled: true,
       headers: '*',
-      origin: ['http://localhost:3000', 'https://candito.studio', 'https://lustrous-baklava-ede9b2.netlify.app']
+      origin: ['http://localhost:3000', 'https://zoe-candito-backend.herokuapp.com', 'http://localhost:1337', 'https://candito.studio', 'https://lustrous-baklava-ede9b2.netlify.app']
     }
   },
   'strapi::poweredBy',

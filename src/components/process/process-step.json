@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_process_process_steps",
+  "info": {
+    "displayName": "Process step",
+    "icon": "atlas"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "text"
+    }
+  }
+}

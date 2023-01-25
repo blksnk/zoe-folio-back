@@ -16,12 +16,12 @@ module.exports = {
     }, {
       method: 'PATCH',
       path: '/project/:id/media/update/:mediaId',
-      handler: "project.updateMedia"
+      handler: "project.updateMedia",
     },
     {
       method: 'PUT',
       path: '/projects/:id/media/thumbnail',
-      handler: 'project.setThumbnail'
+      handler: 'project.setThumbnail',
     }
   ],
 }

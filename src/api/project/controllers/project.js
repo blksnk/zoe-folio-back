@@ -9,18 +9,30 @@ const collectionType = 'project'
 const schema = require(`../content-types/${collectionType}/schema.json`);
 const {
   createPopulatedController,
-  getPopulateFromSchema
 } = require("../../../helpers/populate");
 const endpoint = `api::${collectionType}.${collectionType}`
 
 const populate = {
-  "media.project-media": true, "sizing.size": true, Medias: {
+  "media.project-media": true,
+  "sizing.size": true,
+  Medias: {
     populate: {
       id: true, media: true, pending: true, size: {
         populate: {
-          x: true, y: true, width: true, height: true,
+          x: true,
+          y: true,
+          width: true,
+          height: true,
         }
       }
+    }
+  },
+  size: {
+    populate: {
+      x: true,
+      y: true,
+      width: true,
+      height: true,
     }
   }
 }
@@ -152,7 +164,6 @@ const updateMedia = (strapi) => async (ctx) => {
     }
   })
 
-  console.log(mediaId, media.media.id)
 
   // delete old file from storage
   strapi.log('Deleting old file with id ' + media.media.id)
@@ -185,11 +196,13 @@ const setMediaSizes = (strapi) => async (ctx) => {
   })).Medias
 
   const concatSize = (size, mediaId) => ({
-    ...size, ...(sizes.find(m => m.id === mediaId)?.size ?? {})
+    ...size,
+    ...(sizes.find(m => m.id === mediaId)?.size ?? {})
   })
 
   const newMedias = medias.map(media => ({
-    ...media, size: concatSize(media.size, media.id)
+    ...media,
+    size: concatSize(media.size, media.id)
   }))
 
   const updated = await strapi.entityService.update(endpoint, id, {
@@ -201,10 +214,37 @@ const setMediaSizes = (strapi) => async (ctx) => {
   ctx.body = updated.Medias
 }
 
+const reorderProjects = (strapi) => async (ctx) => {
+  const { order } = ctx.request.body;
+  console.log(order);
+}
+
+const setProjectSizes = (strapi) => async (ctx) => {
+  const { projectSizes } = ctx.request.body;
+  const updates = await Promise.all(projectSizes.map(async (projectSize) => {
+    const project = await strapi.entityService.findOne(endpoint, projectSize.id, {
+      populate
+    });
+    // keep stored size component id, update other values
+    const newSize = {
+      ...projectSize,
+      id: project.size.id,
+    }
+    return await strapi.entityService.update(endpoint, projectSize.id, {
+      data: {
+        size: newSize,
+      }, populate,
+    })
+  }))
+  ctx.body = updates;
+}
+
 module.exports = createPopulatedController(endpoint, schema, {
   addMedia,
   deleteMedia,
   setMediaSizes,
   updateMedia,
-  setThumbnail
+  setThumbnail,
+  reorderProjects,
+  setProjectSizes,
 });
